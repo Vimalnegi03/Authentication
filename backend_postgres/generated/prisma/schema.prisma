@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js" //this prisma client gives suggestions
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//This code is created by prisma on its own here er create all the models and all
+//model that we want to create and its name
+model User {
+  id                      String   @id @default(cuid()) //id ->is field name String->it is id type and @id ->means id is unique or primary @default() means we want a default value that is unique
+  name                    String
+  email                   String   @unique
+  phone                   String   @unique
+  password                String
+  isVerified              Boolean  @default(false)
+  verificationToken       String?
+  resetPasswordToken      String?
+  role                    String   @default("user")
+  resetPasswordExpiryData String?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @default(now())
+}
