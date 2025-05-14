@@ -13,7 +13,6 @@ export const Vimal=async(req,res)=>{
 
 export const registerUser=async(req,res)=>{
   try {
-    console.log(process.env.MAIL_TRAP_SENDEREMAIL)
       const {name,email,password}=req.body;
       if(!name||!email||!password)
       {
